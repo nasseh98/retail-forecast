@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Forecast Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+        }
+        .navbar {
+            background: #007BFF;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        select, button, a.download-btn {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button, a.download-btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button:hover, a.download-btn:hover {
+            background: #0056b3;
+        }
+        .chart {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">🔮 Prediction</a>
+        <a href="/dashboard">📊 Dashboard</a>
+    </div>
+
+    <div class="container">
+        <h2>Retail Sales Dashboard</h2>
+        
+        <form method="POST" action="/dashboard">
+            <label for="store_id">Select Store:</label>
+            <select name="store_id" id="store_id">
+                {% for store in store_ids %}
+                    <option value="{{ store }}" {% if store == selected_store %}selected{% endif %}>
+                        Store {{ store }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="item_id">Select Item:</label>
+            <select name="item_id" id="item_id">
+                {% for item in item_ids %}
+                    <option value="{{ item }}" {% if item == selected_item %}selected{% endif %}>
+                        Item {{ item }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Update</button>
+            <a class="download-btn" href="/download_csv/{{ selected_store }}/{{ selected_item }}">⬇ Download CSV</a>
+        </form>
+
+        <!-- Item-level sales -->
+        <div class="chart">
+            {{ chart_item | safe }}
+        </div>
+
+        <!-- Store-level breakdown -->
+        <div class="chart">
+            {{ chart_store | safe }}
+        </div>
+    </div>
+</body>
+</html>
