@@ -5,6 +5,7 @@ A Flask web app that predicts and visualizes retail sales using **Machine Learni
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web%20Framework-lightgrey.svg)](https://flask.palletsprojects.com/)
 [![ML](https://img.shields.io/badge/Machine%20Learning-XGBoost%20%7C%20ScikitLearn-green)](https://scikit-learn.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -56,4 +57,5 @@ python train_model.py
 
 # Run app
 python app.py
+
 
